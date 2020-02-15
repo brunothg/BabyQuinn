@@ -229,7 +229,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00001270773, y: -0.0014749189}
+  m_AnchoredPosition: {x: 0.00001270773, y: -0.00013378124}
   m_SizeDelta: {x: -10.99944, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &435484202
@@ -265,9 +265,10 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Copyright \xA9 2020 by brunothg\r\n\r\nDieses Material steht unter der
     Creative-Commons-Lizenz Namensnennung - Weitergabe unter gleichen Bedingungen
-    4.0 International.\r\nUm eine Kopie dieser Lizenz zu sehen, besuchen Sie http://creativecommons.org/licenses/by-sa/4.0/.\r\n\r\nViele
-    Grafiken und Sounds stammen von https://www.kenney.nl/ und werden dort unter
-    der CC0 Lizenz (CC0 1.0 Universal (CC0 1.0)\r\nPublic Domain Dedication) angeboten."
+    4.0 International.\r\nUm eine Kopie dieser Lizenz zu sehen, besuchen Sie http://creativecommons.org/licenses/by-sa/4.0/.\r\n\r\nEinige
+    Grafiken, Sounds und Schriften stammen von https://www.kenney.nl/ und werden
+    dort unter der CC0 Lizenz (CC0 1.0 Universal (CC0 1.0)\r\nPublic Domain Dedication)
+    angeboten."
 --- !u!222 &435484203
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -557,7 +558,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 525993231}
   m_HandleRect: {fileID: 525993230}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -976,7 +977,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 310862060}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9983862
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
