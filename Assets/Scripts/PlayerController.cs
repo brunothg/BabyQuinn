@@ -53,6 +53,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void addPoints(int addedPoints) {
+        points += Mathf.Abs(addedPoints);
+    }
+
     void Awake() {
         applicationController = ApplicationController.getSceneInstance();
     }
@@ -78,9 +82,9 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         grounded = getGroundTest();
-        actualSpeed = p_rigidbody2D.velocity.x;
         
-
+        // Calculate actual speed & acceleration
+        actualSpeed = p_rigidbody2D.velocity.x;
         if (Mathf.Abs(actualAccelerationX) > 0.1 && (grounded || airControl)) {
             actualSpeed += actualAccelerationX * Time.fixedDeltaTime;
         }
@@ -88,24 +92,23 @@ public class PlayerController : MonoBehaviour
         actualSpeed = (Mathf.Abs(actualSpeed) < minSpeed) ? minSpeed * getNormalizedDirection(actualAccelerationX) : actualSpeed;
         p_rigidbody2D.velocity = (Vector2.right * actualSpeed) + (Vector2.up * p_rigidbody2D.velocity.y);
 
+        // Calculate Sprite direction & mirroring
         if (rightFaced && getNormalizedDirection(actualSpeed) < 0 || !rightFaced && getNormalizedDirection(actualSpeed) > 0) {
             // Switch the way the player is labelled as facing.
             rightFaced = !rightFaced;
-
-            // Multiply the player's x local scale by -1.
-            // Vector3 theScale = transform.localScale;
-            // theScale.x *= -1;
-            // transform.localScale = theScale;
             spriteRenderer.flipX = !rightFaced;
         }
 
+        // Calculate Jump force
         if (jump && grounded && p_rigidbody2D.velocity.y >= 0) {
             grounded = false;
             p_rigidbody2D.AddForce(Vector2.up * jumpForce);
         }
 
+        // Enabel/Disable Duck Colliders
         Array.ForEach(headColliders, (headCollider) => headCollider.enabled = !(grounded && duck));
 
+        // Instruct Animator
         if (animator != null)  {
             animator.SetBool("Grounded", grounded);
             animator.SetBool("Duck", duck);
