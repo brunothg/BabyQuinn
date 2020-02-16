@@ -5,26 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class DeathCollider : MonoBehaviour
 {
-    public GameObject collidable;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    // called when the cube hits the floor
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == collidable) {
+        var playerController = collision.gameObject.GetComponent<PlayerController>();
+        if (playerController != null) {
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
+        } else {
+            Destroy(collision.gameObject);
         }
     }
 }

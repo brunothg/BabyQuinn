@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
             p_rigidbody2D.AddForce(Vector2.up * jumpForce);
         }
 
-        Array.ForEach(headColliders, (headCollider) => headCollider.enabled = !(grounded && duck && Mathf.Abs(actualSpeed) > 0.01));
+        Array.ForEach(headColliders, (headCollider) => headCollider.enabled = !(grounded && duck));
 
         if (animator != null)  {
             animator.SetBool("Grounded", grounded);
