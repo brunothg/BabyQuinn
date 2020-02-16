@@ -62,7 +62,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -8934590758791798264}
-    m_Position: {x: 240, y: 340, z: 0}
+    m_Position: {x: 340, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3343468571282040562}
     m_Position: {x: -190, y: 340, z: 0}
@@ -262,6 +262,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: Duck
+    m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: ActualAbsoluteSpeed
     m_EventTreshold: 0.01
@@ -541,9 +544,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Duck
     m_EventTreshold: 0
-  - m_ConditionMode: 3
-    m_ConditionEvent: ActualAbsoluteSpeed
-    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3343468571282040562}
   m_Solo: 0
