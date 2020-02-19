@@ -13,23 +13,29 @@ public class PlayerController : MonoBehaviour
     public bool airControl = false;
     public bool rightFaced = true;
     public float groundedOffset = 1;
+    public float ceilingOffset = 0.5f;
     public Animator animator;
-    public CircleCollider2D[] headColliders;
-    public SpriteRenderer spriteRenderer;
+    public Collider2D[] headColliders;
     public PlayerInput controls;
     
 
     [SerializeField]
     float actualSpeed = 0f;
+
     [SerializeField]
     float actualAccelerationX = 0f;
+    
     [SerializeField]
     bool jump = false;
+    
     [SerializeField]
     bool duck = false;
+    
     [SerializeField]
     bool grounded = true;
+    
     Rigidbody2D p_rigidbody2D;
+    
     ApplicationController applicationController;
     
     public int points {
@@ -73,7 +79,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        actualAccelerationX = controls.getHorizontalMovement()* acceleration;
+        actualAccelerationX = controls.getHorizontalMovement() * acceleration;
         jump = controls.isJump();
         duck = controls.isDuck();
     }
@@ -82,6 +88,9 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         grounded = getGroundTest();
+        if (getCeilTest()) {
+            duck = true;
+        }
         
         // Calculate actual speed & acceleration
         actualSpeed = p_rigidbody2D.velocity.x;
@@ -96,7 +105,9 @@ public class PlayerController : MonoBehaviour
         if (rightFaced && getNormalizedDirection(actualSpeed) < 0 || !rightFaced && getNormalizedDirection(actualSpeed) > 0) {
             // Switch the way the player is labelled as facing.
             rightFaced = !rightFaced;
-            spriteRenderer.flipX = !rightFaced;
+            var actualScale = transform.localScale;
+            actualScale.x *= -1;
+            transform.localScale = actualScale;
         }
 
         // Calculate Jump force
@@ -116,6 +127,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private bool getCeilTest() {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, ceilingOffset);
+        
+        foreach (var hit in hits) {
+            if (hit.rigidbody != p_rigidbody2D) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private bool getGroundTest() {
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.down, groundedOffset);
         
@@ -124,7 +146,7 @@ public class PlayerController : MonoBehaviour
                 return true;
             }
         }
-        return p_rigidbody2D.velocity.y == 0;
+        return false;
     }
     private float getNormalizedDirection(float value){
         if (value == 0) {

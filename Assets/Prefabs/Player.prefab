@@ -1070,10 +1070,10 @@ MonoBehaviour:
   airControl: 0
   rightFaced: 1
   groundedOffset: 1.2
+  ceilingOffset: 0.6
   animator: {fileID: 2721616137756083197}
   headColliders:
   - {fileID: 2721616137756083184}
-  spriteRenderer: {fileID: 2721616137756083186}
   controls: {fileID: 4151943617166503214}
   actualSpeed: 0
   actualAccelerationX: 0
@@ -1133,7 +1133,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e6c1f9fdc0b0beb4c989b231ed85a03b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: af1f09c358686d14d999f3d84da6115f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1

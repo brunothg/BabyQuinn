@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour
     }
 
     virtual public bool isJump(){
-        return Input.GetButton("Jump");
+        return Input.GetButton("Jump") || Input.GetButton("Vertical");
     }
 
     virtual public bool isDuck(){
