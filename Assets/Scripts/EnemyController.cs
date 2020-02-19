@@ -42,10 +42,11 @@ public class EnemyController : MonoBehaviour
         if (maxLeft <= 0 && maxRight <=0) {
             actualSpeed = 0;
         } else {
-            var direction = startPosition - transform.position;
+            var direction =  transform.position - startPosition;
             var sqrDistance = direction.sqrMagnitude;
             
     	    if ((direction.x < 0 && sqrDistance >= maxLeft * maxLeft) || (direction.x > 0 && sqrDistance >= maxRight * maxRight)) {
+                Debug.Log("Max distance - change direction");
                 speed *= -1;
                 actualSpeed = speed;
             }
@@ -74,6 +75,7 @@ public class EnemyController : MonoBehaviour
         if (hitPoints <= 0) {
             var playerController = projectile.emmitedFrom.GetComponent<PlayerController>();
             if (playerController != null) {
+                Debug.Log("Killed Enemy - Points: " + maxHitPoints);
                 playerController.addPoints(maxHitPoints);
             }
 

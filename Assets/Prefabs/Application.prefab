@@ -48,3 +48,4 @@ MonoBehaviour:
   cancelNullSceneQuit: 1
   levels:
   - {fileID: 11400000, guid: 3f42709324020a84ba2cc301abf7d359, type: 2}
+  - {fileID: 11400000, guid: aa6db0e49f6bed34c912eec4de130e9e, type: 2}

@@ -40,7 +40,11 @@ public class LevelObject : ScriptableObject
     public string info {
         get {
             
-            var result = "" 
+            var result = (ApplicationController.getSceneInstance().score < requireScore)
+            
+            ? "Zum Freischalten werden " + requireScore + "Punkte benötigt" 
+            
+            : "" 
             + "Score: " + score + "\n"
             + "Zeit:  " + TimeSpan.FromSeconds(time).ToString(@"mm\:ss");
 
