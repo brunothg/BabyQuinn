@@ -21,6 +21,6 @@ public class PlayerInput : MonoBehaviour
     }
 
     virtual public bool isFire(){
-        return Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2");
+        return Input.GetButton("Fire1") || Input.GetButton("Fire2");
     }
 }

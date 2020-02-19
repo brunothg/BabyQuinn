@@ -1072,7 +1072,7 @@ MonoBehaviour:
   rightFaced: 1
   groundedOffset: 1.2
   ceilingOffset: 0.6
-  fireCooldown: 1.5
+  fireCooldown: 0.8
   animator: {fileID: 2721616137756083197}
   headCollider: {fileID: 2721616137756083184}
   controls: {fileID: 4151943617166503214}
@@ -1593,7 +1593,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4151943617166503214}
-          m_MethodName: onDuck
+          m_MethodName: onFire
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1608,7 +1608,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4151943617166503214}
-          m_MethodName: onDuck
+          m_MethodName: onFire
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
