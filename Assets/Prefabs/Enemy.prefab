@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4050762005605567652}
   - component: {fileID: 4050762005605567657}
   - component: {fileID: 4050762005605567656}
-  - component: {fileID: 4050762005605567663}
   - component: {fileID: 4050762005605567659}
   - component: {fileID: 4050762005605567658}
   m_Layer: 0
@@ -143,22 +142,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.76, y: 1.2}
   m_Direction: 0
---- !u!70 &4050762005605567663
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050762005605567660}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.76, y: 1.2}
-  m_Direction: 0
 --- !u!114 &4050762005605567659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +157,8 @@ MonoBehaviour:
   maxHitPoints: 1
   speed: 2
   rightFaced: 1
+  maxLeft: 0
+  maxRight: 0
   groundedOffset: 1.2
   wallOffset: 0.5
   hitPoints: 0
