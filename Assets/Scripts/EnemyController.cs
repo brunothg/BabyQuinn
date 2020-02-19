@@ -9,13 +9,16 @@ public class EnemyController : MonoBehaviour
     public int maxHitPoints = 1;
     public int speed = 2;
     public bool rightFaced = true;
+    public float maxLeft;
+    public float maxRight;
     public float groundedOffset = 1;
-    public float wallOffset = 0.1f;
+    public float wallOffset = 0.5f;
 
     [SerializeField]
     int hitPoints;
     public Animator animator;
     Rigidbody2D p_rigidbody2D;
+    Vector3 startPosition;
     Vector3 lastPositionWallTest;
 
     void Start()
@@ -24,16 +27,29 @@ public class EnemyController : MonoBehaviour
         p_rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     
+        startPosition = this.transform.position;
         lastPositionWallTest = this.transform.position;
     }
 
     void FixedUpdate()
     {   
         if (getWallTest()) {
+            Debug.Log("Wall detected");
             speed *= -1;
         }
 
         var actualSpeed = speed;
+        if (maxLeft <= 0 && maxRight <=0) {
+            actualSpeed = 0;
+        } else {
+            var direction = startPosition - transform.position;
+            var sqrDistance = direction.sqrMagnitude;
+            
+    	    if ((direction.x < 0 && sqrDistance >= maxLeft * maxLeft) || (direction.x > 0 && sqrDistance >= maxRight * maxRight)) {
+                speed *= -1;
+                actualSpeed = speed;
+            }
+        }
         p_rigidbody2D.velocity = (Vector2.right * actualSpeed) + (Vector2.up * p_rigidbody2D.velocity.y);
 
         // Calculate Sprite direction & mirroring
