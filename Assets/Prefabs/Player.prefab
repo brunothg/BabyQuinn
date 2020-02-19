@@ -898,10 +898,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2721616137756083185}
   - component: {fileID: 2721616137756083186}
+  - component: {fileID: 2721616137756083197}
   - component: {fileID: 2721616137756083199}
   - component: {fileID: 2721616137756083198}
   - component: {fileID: 2721616137756083184}
-  - component: {fileID: 2721616137756083197}
   - component: {fileID: 2721616137756083196}
   - component: {fileID: 4151943617166503214}
   m_Layer: 0
@@ -979,6 +979,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2721616137756083197
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2721616137756083187}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8119be4e2b2069740bf2dabd9c7f6670, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &2721616137756083199
 Rigidbody2D:
   serializedVersion: 4
@@ -1032,25 +1051,6 @@ CircleCollider2D:
   m_Offset: {x: -0.06, y: 0.13}
   serializedVersion: 2
   m_Radius: 0.116350204
---- !u!95 &2721616137756083197
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2721616137756083187}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8119be4e2b2069740bf2dabd9c7f6670, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2721616137756083196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,9 +1073,7 @@ MonoBehaviour:
   groundedOffset: 1.2
   ceilingOffset: 0.6
   fireCooldown: 0.8
-  animator: {fileID: 2721616137756083197}
   headCollider: {fileID: 2721616137756083184}
-  controls: {fileID: 4151943617166503214}
   projectile: {fileID: 4687587644104036644, guid: 197c500db6b4ded408185ff447adad39,
     type: 3}
   actualSpeed: 0

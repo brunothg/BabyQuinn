@@ -4,6 +4,8 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
     public float maxSpeed = 6;
@@ -16,9 +18,8 @@ public class PlayerController : MonoBehaviour
     public float groundedOffset = 1;
     public float ceilingOffset = 0.5f;
     public float fireCooldown = 1.5f;
-    public Animator animator;
+    
     public Collider2D headCollider;
-    public PlayerInput controls;
     public GameObject projectile;
     
 
@@ -45,6 +46,10 @@ public class PlayerController : MonoBehaviour
     
     Rigidbody2D p_rigidbody2D;
     
+    Animator animator;
+
+    PlayerInput controls;
+
     ApplicationController applicationController;
     
     public int points {
@@ -80,7 +85,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         p_rigidbody2D = GetComponent<Rigidbody2D>();
-        controls = (controls!=null) ? controls : gameObject.AddComponent<PlayerInput>();
+        controls = gameObject.GetComponent<PlayerInput>();
+        animator = gameObject.GetComponent<Animator>();
         startTime = Time.time;
         points = 0;
     }
@@ -152,6 +158,7 @@ public class PlayerController : MonoBehaviour
 
     private bool getCeilTest() {
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, ceilingOffset);
+        Debug.DrawRay(transform.position, Vector2.up * ceilingOffset, Color.green, .2f, false);
         
         foreach (var hit in hits) {
             if (hit.rigidbody != p_rigidbody2D) {
@@ -163,6 +170,7 @@ public class PlayerController : MonoBehaviour
 
     private bool getGroundTest() {
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.down, groundedOffset);
+        Debug.DrawRay(transform.position, Vector2.down * groundedOffset, Color.red, .2f, false);
         
         foreach (var hit in hits) {
             if (hit.rigidbody != p_rigidbody2D) {
@@ -171,6 +179,7 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
+
     private float getNormalizedDirection(float value){
         if (value == 0) {
             return 0;

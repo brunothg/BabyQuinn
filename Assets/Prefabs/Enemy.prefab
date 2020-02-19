@@ -171,6 +171,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e96b389ac7afc84bb0aa4cc0edaea25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHitPoints: 1
+  speed: 2
+  rightFaced: 1
+  groundedOffset: 1.2
+  wallOffset: 0.5
+  hitPoints: 0
+  animator: {fileID: 0}
 --- !u!114 &4050762005605567658
 MonoBehaviour:
   m_ObjectHideFlags: 0
