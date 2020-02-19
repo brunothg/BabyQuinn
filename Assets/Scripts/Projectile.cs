@@ -24,12 +24,13 @@ public class Projectile : MonoBehaviour
     // FixedUpdate is called at fixed rate (physics)
     void FixedUpdate()
     {
-        p_rigidbody2D.velocity = new Vector3(speed, p_rigidbody2D.velocity.y);
+        p_rigidbody2D.velocity = new Vector3(speed * ((directionRight) ? +1 : -1), p_rigidbody2D.velocity.y);
 
         if (transform.position.x >= startPosition.x + maxDistance) {
             Destroy(this.gameObject);
         }
     }
+
 
     void OnTriggerEnter2D(Collider2D collision)
     {
