@@ -9,14 +9,17 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 6;
     public float minSpeed = 2;
     public float acceleration = 9;
+    public float duckSlowdownFactor = 0.6f;
     public float jumpForce = 400;
     public bool airControl = false;
     public bool rightFaced = true;
     public float groundedOffset = 1;
     public float ceilingOffset = 0.5f;
+    public float fireCooldown = 1.5f;
     public Animator animator;
-    public Collider2D[] headColliders;
+    public Collider2D headCollider;
     public PlayerInput controls;
+    public GameObject projectile;
     
 
     [SerializeField]
@@ -30,9 +33,15 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField]
     bool duck = false;
+
+    [SerializeField]
+    bool fire = false;
     
     [SerializeField]
     bool grounded = true;
+
+    [SerializeField]
+    float fireCooldownTimer = 0;
     
     Rigidbody2D p_rigidbody2D;
     
@@ -82,6 +91,7 @@ public class PlayerController : MonoBehaviour
         actualAccelerationX = controls.getHorizontalMovement() * acceleration;
         jump = controls.isJump();
         duck = controls.isDuck();
+        fire = controls.isFire();
     }
 
     // FixedUpdate is called at fixed rate (physics)
@@ -91,11 +101,12 @@ public class PlayerController : MonoBehaviour
         if (getCeilTest()) {
             duck = true;
         }
+        fireCooldownTimer = Mathf.Max(0, fireCooldownTimer - Time.fixedDeltaTime);
         
         // Calculate actual speed & acceleration
         actualSpeed = p_rigidbody2D.velocity.x;
         if (Mathf.Abs(actualAccelerationX) > 0.1 && (grounded || airControl)) {
-            actualSpeed += actualAccelerationX * Time.fixedDeltaTime;
+            actualSpeed += ((!duck)? actualAccelerationX : actualAccelerationX * duckSlowdownFactor) * Time.fixedDeltaTime;
         }
         actualSpeed = Mathf.Min(Mathf.Max(-maxSpeed, actualSpeed), +maxSpeed);
         actualSpeed = (Mathf.Abs(actualSpeed) < minSpeed) ? minSpeed * getNormalizedDirection(actualAccelerationX) : actualSpeed;
@@ -117,7 +128,19 @@ public class PlayerController : MonoBehaviour
         }
 
         // Enabel/Disable Duck Colliders
-        Array.ForEach(headColliders, (headCollider) => headCollider.enabled = !(grounded && duck));
+        headCollider.enabled = !(grounded && duck);
+
+        // Fire
+        if (fire && fireCooldownTimer <= 0 && !duck) {
+            fireCooldownTimer = fireCooldown;
+
+            var newProjectile = Instantiate(projectile);
+            newProjectile.transform.position = this.transform.position + (Vector3)headCollider.offset;
+            
+            var projectileComp = newProjectile.GetComponent<Projectile>();
+            projectileComp.directionRight = rightFaced;
+            projectileComp.emmitedFrom = this.gameObject;
+        }
 
         // Instruct Animator
         if (animator != null)  {

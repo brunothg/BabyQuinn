@@ -9,6 +9,7 @@ public class MobileEnabledPlayerInput : PlayerInput
     private bool eventJump = false;
     private bool eventDuck = false;
     private bool eventCancel = false;
+    private bool eventFire = false;
 
     public void onMove(float movement){
         Debug.Log("onMove: " + movement);
@@ -27,6 +28,12 @@ public class MobileEnabledPlayerInput : PlayerInput
         Debug.Log("onDuck: " + duck);
 
         eventDuck = duck;
+    }
+
+    public void onFire(bool fire){
+        Debug.Log("onFire: " + fire);
+
+        eventFire = fire;
     }
 
     public void onCancel(bool cancel){
@@ -54,6 +61,13 @@ public class MobileEnabledPlayerInput : PlayerInput
         //Debug.Log("isDuck: " + duck);
 
         return duck;
+    }
+
+    override public bool isFire(){
+        var fire = base.isFire() || eventFire;
+        //Debug.Log("isFire: " + fire);
+
+        return fire;
     }
 
     override public bool isCancel(){

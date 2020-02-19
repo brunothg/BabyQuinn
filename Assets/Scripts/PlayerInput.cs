@@ -19,4 +19,8 @@ public class PlayerInput : MonoBehaviour
     virtual public bool isCancel(){
         return Input.GetButton("Cancel");
     }
+
+    virtual public bool isFire(){
+        return Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2");
+    }
 }
