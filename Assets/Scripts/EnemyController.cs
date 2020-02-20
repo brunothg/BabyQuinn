@@ -13,20 +13,30 @@ public class EnemyController : MonoBehaviour
     public float maxRight;
     public float groundedOffset = 1;
     public float wallOffset = 0.5f;
+    
 
     [SerializeField]
     int hitPoints;
-    public Animator animator;
+    Animator animator;
     Rigidbody2D p_rigidbody2D;
     Vector3 startPosition;
     Vector3 lastPositionWallTest;
+    GameObject healthBar;
+    RectTransform healthBarForegroundTransform;
+   
 
     void Start()
     {
         hitPoints = maxHitPoints;
         p_rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-    
+
+        try {
+            healthBar = transform.Find("HealthBar").gameObject;
+            healthBar.SetActive(maxHitPoints > 1);
+            healthBarForegroundTransform = healthBar.transform.Find("Foreground").gameObject.GetComponent<RectTransform>();
+        } catch {}
+
         startPosition = this.transform.position;
         lastPositionWallTest = this.transform.position;
     }
@@ -80,9 +90,22 @@ public class EnemyController : MonoBehaviour
             }
 
             Destroy(this.gameObject);
+            return;
+        }
+
+        // Set health bar
+        if (healthBarForegroundTransform != null) {
+
+            float difference = 1 - getPercentageHealth();
+            healthBarForegroundTransform.anchorMax = new Vector2(1-(difference / 2), 1);
+            healthBarForegroundTransform.anchorMin = new Vector2((difference / 2), 0);
+            BroadcastMessage("", getPercentageHealth());
         }
     }
 
+    private float getPercentageHealth() {
+        return (float)hitPoints / (float)maxHitPoints;
+    }
     
     private bool getWallTest() {
         var actualPosition = transform.position;
